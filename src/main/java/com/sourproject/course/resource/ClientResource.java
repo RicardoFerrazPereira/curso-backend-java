@@ -5,15 +5,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sourproject.course.entities.User;
+import com.sourproject.course.entities.Client;
 
 @RestController
-@RequestMapping(value = "/users")
-public class UserResource {
+@RequestMapping("/clients")
+public class ClientResource {
 	
 	@GetMapping
-	public ResponseEntity<User> findAll() {
-		User u = new User(1L, "Maria", "maria@gmail.com", "1234567", "12345");
+	public ResponseEntity<Client> findAll() {
+		Client u = new Client(1L, "Maria", "maria@gmail.com", "1234567", "12345");
 		return ResponseEntity.ok().body(u);
 	}
 
