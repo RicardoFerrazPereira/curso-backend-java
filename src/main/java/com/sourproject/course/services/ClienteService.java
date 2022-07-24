@@ -3,6 +3,8 @@ package com.sourproject.course.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -45,9 +47,13 @@ public class ClienteService {
 	
 	@SuppressWarnings("deprecation")
 	public Cliente update(Long id, Cliente obj) {
-		Cliente entity = repository.getOne(id);
-		updateData(entity, obj);
-		return repository.save(entity);
+		try {
+			Cliente entity = repository.getOne(id);
+			updateData(entity, obj);
+			return repository.save(entity);
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException(id);
+		}
 	}
 	
 	public void updateData(Cliente entity, Cliente obj) {
