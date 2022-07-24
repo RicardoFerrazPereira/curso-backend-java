@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.sourproject.course.entities.Cliente;
 import com.sourproject.course.repositories.ClienteRepository;
+import com.sourproject.course.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class ClienteService {
@@ -21,7 +22,8 @@ public class ClienteService {
 	
 	public Cliente findById(Long id) {
 		Optional<Cliente> obj = repository.findById(id);
-		return obj.get();
+		// orElseThrow - vai tentar da o 'get()", se não achar usuario, eu vou lançar uma exceção
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
 	public Cliente insert(Cliente obj) {
