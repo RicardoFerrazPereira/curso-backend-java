@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import com.sourproject.course.entities.Categoria;
 import com.sourproject.course.entities.Cliente;
 import com.sourproject.course.entities.ItemPedido;
+import com.sourproject.course.entities.Pagamento;
 import com.sourproject.course.entities.Pedido;
 import com.sourproject.course.entities.Produto;
 import com.sourproject.course.entities.enums.PedidoStatus;
@@ -82,6 +83,11 @@ public class TestConfig implements CommandLineRunner {
 		ItemPedido oi4 = new ItemPedido(o3, p5, 2, p5.getPrice()); 
 		
 		itemPedidoRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+		
+		Pagamento pay1 = new Pagamento(null, Instant.parse("2019-06-20T21:53:07Z"), o1);
+		o1.setPagamento(pay1);
+		
+		pedidoRepository.save(o1);
 		
 	}
 
