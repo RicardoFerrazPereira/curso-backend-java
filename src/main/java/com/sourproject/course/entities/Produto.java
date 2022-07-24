@@ -11,7 +11,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.JoinColumn;
 
 @Entity
@@ -37,6 +41,10 @@ public class Produto implements Serializable {
 		joinColumns = @JoinColumn(name = "produto_id"),
 		inverseJoinColumns = @JoinColumn(name = "categoria_id"))
 	private Set<Categoria> categorias = new HashSet<>();
+	
+	//Relação com ItemPedido
+	@OneToMany(mappedBy = "id.produto")
+	private Set<ItemPedido> itensPedido = new HashSet<>();
 	
 	public Produto() {
 		
@@ -93,6 +101,16 @@ public class Produto implements Serializable {
 
 	public Set<Categoria> getCategorias() {
 		return categorias;
+	}
+	
+	@JsonIgnore
+	public Set<Pedido> getPedido() {
+		Set<Pedido> set = new HashSet<>();
+		for (ItemPedido x : itensPedido) {
+			set.add(x.getPedido());
+		}
+		return set;
+		
 	}
 
 	@Override
