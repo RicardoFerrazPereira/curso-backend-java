@@ -7,23 +7,23 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-import com.sourproject.course.entities.Client;
-import com.sourproject.course.repositories.ClientRepository;
+import com.sourproject.course.entities.Cliente;
+import com.sourproject.course.repositories.ClienteRepository;
 
 @Configuration
 @Profile("test")
 public class TestConfig implements CommandLineRunner {
 	
 	@Autowired
-	private ClientRepository clientRepository;
+	private ClienteRepository clienteRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
 		
-		Client u1 = new Client(null, "Maria Brown", "maria@gmail.com", "988888888", "123456"); 
-		Client u2 = new Client(null, "Alex Green", "alex@gmail.com", "977777777", "123456");
+		Cliente u1 = new Cliente(null, "Maria Brown", "maria@gmail.com", "988888888", "123456"); 
+		Cliente u2 = new Cliente(null, "Alex Green", "alex@gmail.com", "977777777", "123456");
 		
-		clientRepository.saveAll(Arrays.asList(u1, u2));
+		clienteRepository.saveAll(Arrays.asList(u1, u2));
 	}
 
 }

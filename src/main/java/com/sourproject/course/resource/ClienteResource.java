@@ -9,25 +9,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sourproject.course.entities.Client;
-import com.sourproject.course.services.ClientService;
+import com.sourproject.course.entities.Cliente;
+import com.sourproject.course.services.ClienteService;
 
 @RestController
-@RequestMapping("/clients")
-public class ClientResource {
+@RequestMapping("/clientes")
+public class ClienteResource {
 	
 	@Autowired
-	private ClientService service;
+	private ClienteService service;
 	
 	@GetMapping
-	public ResponseEntity<List<Client>> findAll() {
-		List<Client> list = service.findAll();
+	public ResponseEntity<List<Cliente>> findAll() {
+		List<Cliente> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Client> findById(@PathVariable Long id) {
-		Client obj = service.findById(id);
+	public ResponseEntity<Cliente> findById(@PathVariable Long id) {
+		Cliente obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
 

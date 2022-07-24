@@ -1,15 +1,18 @@
 package com.sourproject.course.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
-public class Client implements Serializable {
+public class Cliente implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -21,11 +24,16 @@ public class Client implements Serializable {
 	private String phone;
 	private String password;
 	
-	public Client() {
+	@OneToMany(mappedBy = "cliente")
+	private List<Pedido> pedidos = new ArrayList<>();
+	
+	
+	
+	public Cliente() {
 		
 	}
 
-	public Client(Long id, String name, String email, String phone, String password) {
+	public Cliente(Long id, String name, String email, String phone, String password) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -74,6 +82,10 @@ public class Client implements Serializable {
 		this.password = password;
 	}
 
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}	
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -87,12 +99,9 @@ public class Client implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Client other = (Client) obj;
+		Cliente other = (Cliente) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
-	
-	
+
 
 }
