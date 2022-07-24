@@ -44,8 +44,7 @@ public class Produto implements Serializable {
 	
 	//Relação com ItemPedido
 	@OneToMany(mappedBy = "id.produto")
-	private Set<ItemPedido> itensPedido = new HashSet<>();
-	
+	private Set<ItemPedido> itensPedido = new HashSet<>();	
 	
 	
 	public Produto() {
